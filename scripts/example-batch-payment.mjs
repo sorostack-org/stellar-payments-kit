@@ -16,9 +16,10 @@ async function main() {
     const result = await sendBatchPayment({
       sourceSecret: source.secretKey,
       payments: [
-        { destinationPublicKey: dest1.publicKey, amount: "10", memo: "First" },
-        { destinationPublicKey: dest2.publicKey, amount: "20", memo: "Second" },
+        { destinationPublicKey: dest1.publicKey, amount: "10" },
+        { destinationPublicKey: dest2.publicKey, amount: "20" },
       ],
+      memo: "Batch payout",
       network: "testnet",
     });
     console.log("Batch sent:", result.hash);

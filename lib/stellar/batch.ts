@@ -11,7 +11,6 @@ import { getServer, getNetworkConfig, StellarNetwork } from "./network";
 export interface BatchPayment {
   destinationPublicKey: string;
   amount: string;
-  memo?: string;
 }
 
 export interface BatchPaymentParams {
@@ -19,6 +18,7 @@ export interface BatchPaymentParams {
   payments: BatchPayment[];
   assetCode?: string;
   assetIssuer?: string;
+  memo?: string;
   network?: StellarNetwork;
 }
 
@@ -28,16 +28,12 @@ export interface BatchPaymentResult {
   paymentCount: number;
 }
 
-export async function sendBatchPayment(
-  params: BatchPaymentParams,
-): Promise<BatchPaymentResult> {
-  const {
-    sourceSecret,
-    payments,
-    assetCode,
-    assetIssuer,
-    network = "testnet",
-  } = params;
+export async function sendBatchPayment(params: BatchPaymentParams): Promise<BatchPaymentResult> {
+  const { sourceSecret, payments, assetCode, assetIssuer, memo, network = "testnet" } = params;
+
+  if (payments.length === 0) {
+    throw new Error("sendBatchPayment requires at least one payment.");
+  }
 
   const sourceKeypair = Keypair.fromSecret(sourceSecret);
   const server = getServer(network);
@@ -45,14 +41,16 @@ export async function sendBatchPayment(
 
   const sourceAccount = await server.loadAccount(sourceKeypair.publicKey());
 
-  const asset = assetCode && assetIssuer
-    ? new Asset(assetCode, assetIssuer)
-    : Asset.native();
+  const asset = assetCode && assetIssuer ? new Asset(assetCode, assetIssuer) : Asset.native();
 
   const builder = new TransactionBuilder(sourceAccount, {
     fee: BASE_FEE,
     networkPassphrase,
   });
+
+  if (memo) {
+    builder.addMemo(Memo.text(memo));
+  }
 
   for (const payment of payments) {
     builder.addOperation(
@@ -62,9 +60,6 @@ export async function sendBatchPayment(
         amount: payment.amount,
       }),
     );
-    if (payment.memo) {
-      builder.addMemo(Memo.text(payment.memo));
-    }
   }
 
   const transaction = builder.setTimeout(30).build();
