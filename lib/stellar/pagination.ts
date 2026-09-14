@@ -20,11 +20,7 @@ export async function getAccountTransactions(
   const { limit = 10, cursor, order = "desc" } = options;
   const server = getServer(network);
 
-  let callBuilder = server
-    .transactions()
-    .forAccount(publicKey)
-    .limit(limit)
-    .order(order);
+  let callBuilder = server.transactions().forAccount(publicKey).limit(limit).order(order);
 
   if (cursor) {
     callBuilder = callBuilder.cursor(cursor);
@@ -47,11 +43,7 @@ export async function getAccountPayments(
   const { limit = 10, cursor, order = "desc" } = options;
   const server = getServer(network);
 
-  let callBuilder = server
-    .payments()
-    .forAccount(publicKey)
-    .limit(limit)
-    .order(order);
+  let callBuilder = server.payments().forAccount(publicKey).limit(limit).order(order);
 
   if (cursor) {
     callBuilder = callBuilder.cursor(cursor);

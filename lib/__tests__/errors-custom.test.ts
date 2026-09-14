@@ -1,5 +1,11 @@
 import { describe, it, expect } from "vitest";
-import { StellarError, ValidationError, NetworkError, NotFoundError, RateLimitError } from "@/lib/stellar/errors";
+import {
+  StellarError,
+  ValidationError,
+  NetworkError,
+  NotFoundError,
+  RateLimitError,
+} from "@/lib/stellar/errors";
 
 describe("Errors", () => {
   describe("StellarError", () => {

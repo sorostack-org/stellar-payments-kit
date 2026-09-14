@@ -25,7 +25,8 @@ export class HealthChecker {
       try {
         components[name] = await check();
         if (components[name].status === "unhealthy") overall = "unhealthy";
-        else if (components[name].status === "degraded" && overall === "healthy") overall = "degraded";
+        else if (components[name].status === "degraded" && overall === "healthy")
+          overall = "degraded";
       } catch (error) {
         components[name] = {
           status: "unhealthy",

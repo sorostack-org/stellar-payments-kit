@@ -1,6 +1,4 @@
-import {
-  Keypair, TransactionBuilder, Operation, Asset, BASE_FEE,
-} from "@stellar/stellar-sdk";
+import { Keypair, TransactionBuilder, Operation, Asset, BASE_FEE } from "@stellar/stellar-sdk";
 import { getServer, getNetworkConfig, StellarNetwork } from "./network";
 
 export interface TimeLockedPaymentParams {
@@ -12,12 +10,14 @@ export interface TimeLockedPaymentParams {
   network?: StellarNetwork;
 }
 
-export async function sendTimeLockedPayment(
-  params: TimeLockedPaymentParams,
-): Promise<string> {
+export async function sendTimeLockedPayment(params: TimeLockedPaymentParams): Promise<string> {
   const {
-    sourceSecret, destinationPublicKey, amount, unlockAt,
-    asset: assetParam, network = "testnet",
+    sourceSecret,
+    destinationPublicKey,
+    amount,
+    unlockAt,
+    asset: assetParam,
+    network = "testnet",
   } = params;
 
   const sourceKeypair = Keypair.fromSecret(sourceSecret);
@@ -28,14 +28,17 @@ export async function sendTimeLockedPayment(
   const asset = assetParam ? new Asset(assetParam.code, assetParam.issuer) : Asset.native();
   const minTime = Math.floor(unlockAt.getTime() / 1000);
   const transaction = new TransactionBuilder(sourceAccount, {
-    fee: BASE_FEE, networkPassphrase,
+    fee: BASE_FEE,
+    networkPassphrase,
     timebounds: { minTime, maxTime: 0 },
   })
-    .addOperation(Operation.payment({
-      destination: destinationPublicKey,
-      asset,
-      amount,
-    }))
+    .addOperation(
+      Operation.payment({
+        destination: destinationPublicKey,
+        asset,
+        amount,
+      }),
+    )
     .setTimeout(0)
     .build();
   transaction.sign(sourceKeypair);

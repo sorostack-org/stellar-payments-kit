@@ -6,12 +6,26 @@ describe("Anchor", () => {
   describe("validateAnchorAsset", () => {
     it("validates correct asset", () => {
       const { publicKey } = generateKeypair();
-      expect(validateAnchorAsset({ code: "USDC", issuer: publicKey, sep24Enabled: true, sep6Enabled: false })).toBe(true);
+      expect(
+        validateAnchorAsset({
+          code: "USDC",
+          issuer: publicKey,
+          sep24Enabled: true,
+          sep6Enabled: false,
+        }),
+      ).toBe(true);
     });
 
     it("rejects empty code", () => {
       const { publicKey } = generateKeypair();
-      expect(validateAnchorAsset({ code: "", issuer: publicKey, sep24Enabled: true, sep6Enabled: false })).toBe(false);
+      expect(
+        validateAnchorAsset({
+          code: "",
+          issuer: publicKey,
+          sep24Enabled: true,
+          sep6Enabled: false,
+        }),
+      ).toBe(false);
     });
   });
 

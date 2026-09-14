@@ -22,14 +22,10 @@ export function createNotification(
   };
 }
 
-export function markAsRead(
-  notification: Notification,
-): Notification {
+export function markAsRead(notification: Notification): Notification {
   return { ...notification, read: true };
 }
 
-export function filterUnread(
-  notifications: Notification[],
-): Notification[] {
+export function filterUnread(notifications: Notification[]): Notification[] {
   return notifications.filter((n) => !n.read);
 }

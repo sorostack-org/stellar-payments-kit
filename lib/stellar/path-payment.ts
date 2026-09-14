@@ -1,10 +1,4 @@
-import {
-  Keypair,
-  TransactionBuilder,
-  Operation,
-  Asset,
-  BASE_FEE,
-} from "@stellar/stellar-sdk";
+import { Keypair, TransactionBuilder, Operation, Asset, BASE_FEE } from "@stellar/stellar-sdk";
 import { getServer, getNetworkConfig, StellarNetwork } from "./network";
 
 export interface PathPaymentParams {
@@ -23,12 +17,16 @@ export interface PathPaymentResult {
   ledger: number;
 }
 
-export async function sendPathPayment(
-  params: PathPaymentParams,
-): Promise<PathPaymentResult> {
+export async function sendPathPayment(params: PathPaymentParams): Promise<PathPaymentResult> {
   const {
-    sourceSecret, destinationPublicKey, sendAsset: send, sendAmount,
-    destAsset: dest, destMinAmount, path = [], network = "testnet",
+    sourceSecret,
+    destinationPublicKey,
+    sendAsset: send,
+    sendAmount,
+    destAsset: dest,
+    destMinAmount,
+    path = [],
+    network = "testnet",
   } = params;
 
   const sourceKeypair = Keypair.fromSecret(sourceSecret);
@@ -41,16 +39,19 @@ export async function sendPathPayment(
   const pathAssets = path.map((p) => new Asset(p.code, p.issuer));
 
   const transaction = new TransactionBuilder(sourceAccount, {
-    fee: BASE_FEE, networkPassphrase,
+    fee: BASE_FEE,
+    networkPassphrase,
   })
-    .addOperation(Operation.pathPaymentStrictSend({
-      destination: destinationPublicKey,
-      sendAsset: sendAssetObj,
-      sendAmount,
-      destAsset: destAssetObj,
-      destMin: destMinAmount,
-      path: pathAssets,
-    }))
+    .addOperation(
+      Operation.pathPaymentStrictSend({
+        destination: destinationPublicKey,
+        sendAsset: sendAssetObj,
+        sendAmount,
+        destAsset: destAssetObj,
+        destMin: destMinAmount,
+        path: pathAssets,
+      }),
+    )
     .setTimeout(30)
     .build();
 

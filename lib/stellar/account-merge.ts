@@ -1,6 +1,4 @@
-import {
-  Keypair, TransactionBuilder, Operation, BASE_FEE,
-} from "@stellar/stellar-sdk";
+import { Keypair, TransactionBuilder, Operation, BASE_FEE } from "@stellar/stellar-sdk";
 import { getServer, getNetworkConfig, StellarNetwork } from "./network";
 
 export interface MergeAccountParams {
@@ -9,9 +7,7 @@ export interface MergeAccountParams {
   network?: StellarNetwork;
 }
 
-export async function mergeAccount(
-  params: MergeAccountParams,
-): Promise<string> {
+export async function mergeAccount(params: MergeAccountParams): Promise<string> {
   const { sourceSecret, destinationPublicKey, network = "testnet" } = params;
 
   const sourceKeypair = Keypair.fromSecret(sourceSecret);
@@ -20,11 +16,14 @@ export async function mergeAccount(
   const sourceAccount = await server.loadAccount(sourceKeypair.publicKey());
 
   const transaction = new TransactionBuilder(sourceAccount, {
-    fee: BASE_FEE, networkPassphrase,
+    fee: BASE_FEE,
+    networkPassphrase,
   })
-    .addOperation(Operation.accountMerge({
-      destination: destinationPublicKey,
-    }))
+    .addOperation(
+      Operation.accountMerge({
+        destination: destinationPublicKey,
+      }),
+    )
     .setTimeout(30)
     .build();
 

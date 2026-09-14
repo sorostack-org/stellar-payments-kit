@@ -1,5 +1,5 @@
 import { Horizon, Keypair } from "@stellar/stellar-sdk";
-import 'dotenv/config';
+import "dotenv/config";
 
 const server = new Horizon.Server("https://horizon-testnet.stellar.org");
 const publicKey = process.argv[2];

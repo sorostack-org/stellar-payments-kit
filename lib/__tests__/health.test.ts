@@ -17,7 +17,9 @@ describe("HealthChecker", () => {
 
   it("marks overall as unhealthy on failure", async () => {
     const hc = new HealthChecker();
-    hc.register("failing", async () => { throw new Error("fail"); });
+    hc.register("failing", async () => {
+      throw new Error("fail");
+    });
     const result = await hc.check();
     expect(result.status).toBe("unhealthy");
   });

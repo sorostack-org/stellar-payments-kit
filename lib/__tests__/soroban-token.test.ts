@@ -1,10 +1,17 @@
 import { describe, it, expect } from "vitest";
-import { parseSorobanTokenResponse, formatTokenAmount, parseTokenAmount } from "@/lib/stellar/soroban-token";
+import {
+  parseSorobanTokenResponse,
+  formatTokenAmount,
+  parseTokenAmount,
+} from "@/lib/stellar/soroban-token";
 
 describe("SorobanToken", () => {
   describe("parseSorobanTokenResponse", () => {
     it("parses token info", () => {
-      const info = parseSorobanTokenResponse(JSON.stringify({ name: "Test", symbol: "TST", decimals: 7, total_supply: "1000" }), "CA123");
+      const info = parseSorobanTokenResponse(
+        JSON.stringify({ name: "Test", symbol: "TST", decimals: 7, total_supply: "1000" }),
+        "CA123",
+      );
       expect(info.name).toBe("Test");
       expect(info.contractId).toBe("CA123");
     });

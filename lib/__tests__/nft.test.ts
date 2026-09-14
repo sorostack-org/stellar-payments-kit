@@ -4,11 +4,23 @@ import { validateNFTMetadata, formatNFTIdentifier, parseNFTIdentifier } from "@/
 describe("NFT", () => {
   describe("validateNFTMetadata", () => {
     it("validates correct metadata", () => {
-      expect(validateNFTMetadata({ name: "Test", description: "Desc", image: "https://example.com/img.png" })).toBe(true);
+      expect(
+        validateNFTMetadata({
+          name: "Test",
+          description: "Desc",
+          image: "https://example.com/img.png",
+        }),
+      ).toBe(true);
     });
 
     it("rejects empty name", () => {
-      expect(validateNFTMetadata({ name: "", description: "Desc", image: "https://example.com/img.png" })).toBe(false);
+      expect(
+        validateNFTMetadata({
+          name: "",
+          description: "Desc",
+          image: "https://example.com/img.png",
+        }),
+      ).toBe(false);
     });
   });
 

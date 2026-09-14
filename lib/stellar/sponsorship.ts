@@ -1,6 +1,4 @@
-import {
-  Keypair, TransactionBuilder, Operation, BASE_FEE,
-} from "@stellar/stellar-sdk";
+import { Keypair, TransactionBuilder, Operation, BASE_FEE } from "@stellar/stellar-sdk";
 import { getServer, getNetworkConfig, StellarNetwork } from "./network";
 
 export interface SponsorshipParams {
@@ -9,9 +7,7 @@ export interface SponsorshipParams {
   network?: StellarNetwork;
 }
 
-export async function beginSponsoring(
-  params: SponsorshipParams,
-): Promise<string> {
+export async function beginSponsoring(params: SponsorshipParams): Promise<string> {
   const { sponsorSecret, sponsoredPublicKey, network = "testnet" } = params;
 
   const sponsorKeypair = Keypair.fromSecret(sponsorSecret);
@@ -20,14 +16,19 @@ export async function beginSponsoring(
   const sponsorAccount = await server.loadAccount(sponsorKeypair.publicKey());
 
   const transaction = new TransactionBuilder(sponsorAccount, {
-    fee: BASE_FEE, networkPassphrase,
+    fee: BASE_FEE,
+    networkPassphrase,
   })
-    .addOperation(Operation.beginSponsoringFutureReserves({
-      sponsoredId: sponsoredPublicKey,
-    }))
-    .addOperation(Operation.endSponsoringFutureReserves({
-      source: sponsoredPublicKey,
-    }))
+    .addOperation(
+      Operation.beginSponsoringFutureReserves({
+        sponsoredId: sponsoredPublicKey,
+      }),
+    )
+    .addOperation(
+      Operation.endSponsoringFutureReserves({
+        source: sponsoredPublicKey,
+      }),
+    )
     .setTimeout(30)
     .build();
 
@@ -47,11 +48,14 @@ export async function revokeSponsorship(
   const sourceAccount = await server.loadAccount(sourceKeypair.publicKey());
 
   const transaction = new TransactionBuilder(sourceAccount, {
-    fee: BASE_FEE, networkPassphrase,
+    fee: BASE_FEE,
+    networkPassphrase,
   })
-    .addOperation(Operation.revokeClaimableBalanceSponsorship({
-      balanceId,
-    }))
+    .addOperation(
+      Operation.revokeClaimableBalanceSponsorship({
+        balanceId,
+      }),
+    )
     .setTimeout(30)
     .build();
 

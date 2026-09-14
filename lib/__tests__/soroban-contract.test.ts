@@ -1,10 +1,18 @@
 import { describe, it, expect } from "vitest";
-import { createContractInstance, formatContractCall, parseContractError } from "@/lib/stellar/soroban-contract";
+import {
+  createContractInstance,
+  formatContractCall,
+  parseContractError,
+} from "@/lib/stellar/soroban-contract";
 
 describe("SorobanContract", () => {
   describe("createContractInstance", () => {
     it("creates contract instance", () => {
-      const contract = createContractInstance("CA123", "testnet", "https://rpc.testnet.stellar.org");
+      const contract = createContractInstance(
+        "CA123",
+        "testnet",
+        "https://rpc.testnet.stellar.org",
+      );
       expect(contract.contractId).toBe("CA123");
       expect(contract.networkPassphrase).toBe("testnet");
     });

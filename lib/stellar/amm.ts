@@ -18,7 +18,7 @@ export function calculateSwapOutput(
   const fee = BigInt(feeBps);
   const basisPoints = BigInt(10000);
 
-  const inputWithFee = input * (basisPoints - fee) / basisPoints;
+  const inputWithFee = (input * (basisPoints - fee)) / basisPoints;
   const numerator = inputWithFee * reserveOut;
   const denominator = reserveIn + inputWithFee;
 
@@ -26,10 +26,7 @@ export function calculateSwapOutput(
   return (numerator / denominator).toString();
 }
 
-export function calculatePoolShare(
-  liquidityTokens: string,
-  totalLiquidity: string,
-): number {
+export function calculatePoolShare(liquidityTokens: string, totalLiquidity: string): number {
   const shares = Number(liquidityTokens);
   const total = Number(totalLiquidity);
   if (total === 0) return 0;
@@ -44,7 +41,7 @@ export function calculateLpTokens(
   reserveB: string,
 ): string {
   if (totalLiquidity === "0" || totalLiquidity === "0") {
-    return (Math.sqrt(Number(amountA) * Number(amountB))).toString();
+    return Math.sqrt(Number(amountA) * Number(amountB)).toString();
   }
   const shareA = (BigInt(amountA) * BigInt(totalLiquidity)) / BigInt(reserveA);
   const shareB = (BigInt(amountB) * BigInt(totalLiquidity)) / BigInt(reserveB);

@@ -14,9 +14,17 @@ export function sanitizeMemo(memo: string, maxLength: number = 28): string {
 }
 
 export function sanitizeAssetCode(code: string): string {
-  return code.trim().replace(/[^a-zA-Z0-9]/g, "").toUpperCase().slice(0, 12);
+  return code
+    .trim()
+    .replace(/[^a-zA-Z0-9]/g, "")
+    .toUpperCase()
+    .slice(0, 12);
 }
 
 export function sanitizeDomain(domain: string): string {
-  return domain.trim().toLowerCase().replace(/^https?:\/\//, "").split("/")[0];
+  return domain
+    .trim()
+    .toLowerCase()
+    .replace(/^https?:\/\//, "")
+    .split("/")[0];
 }

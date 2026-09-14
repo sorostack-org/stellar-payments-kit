@@ -3,10 +3,7 @@ export function calculateMinFee(operationCount: number): string {
   return (baseFee * BigInt(operationCount)).toString();
 }
 
-export function calculateMaxFee(
-  operationCount: number,
-  surchargeMultiplier: number = 10,
-): string {
+export function calculateMaxFee(operationCount: number, surchargeMultiplier: number = 10): string {
   const base = BigInt(100);
   return (base * BigInt(operationCount) * BigInt(surchargeMultiplier)).toString();
 }

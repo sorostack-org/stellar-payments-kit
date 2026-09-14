@@ -20,6 +20,7 @@ A lightweight, developer-friendly toolkit for building payment flows on the [Ste
 Working directly with `stellar-sdk` means writing a lot of boilerplate — loading accounts, constructing `TransactionBuilder` objects, managing fee estimation, handling testnet vs mainnet switching, and more. This kit abstracts that away so you can focus on your product logic.
 
 **Key goals:**
+
 - Minimal API surface — do the most common things in one line
 - TypeScript-first with full type inference
 - Supports both Testnet and Mainnet
@@ -32,6 +33,7 @@ Working directly with `stellar-sdk` means writing a lot of boilerplate — loadi
 ## Features
 
 ### TypeScript Library
+
 - **Account funding & management** — fund Testnet accounts via Friendbot
 - **XLM & asset transfers** — send native XLM or custom assets with automatic fee estimation
 - **Batch payments** — send multiple payments in one transaction
@@ -51,11 +53,13 @@ Working directly with `stellar-sdk` means writing a lot of boilerplate — loadi
 - **Analytics & metrics** — usage tracking and monitoring
 
 ### Soroban Contracts (Rust)
+
 - **Escrow** — trustless escrow with depositor, beneficiary, and arbiter
 - **Token Swap** — atomic swap between two parties
 - **Payment Splitter** — distribute payments proportionally to multiple payees
 
 ### Interactive Demo App
+
 Built with Next.js — explore all features via a clean tabbed interface.
 
 ---

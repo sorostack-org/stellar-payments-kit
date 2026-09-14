@@ -3,7 +3,12 @@ import { createWebhook, validateWebhookUrl, formatWebhookPayload } from "@/lib/s
 
 describe("Webhooks", () => {
   it("creates webhook config", () => {
-    const wh = createWebhook({ url: "https://example.com/hook", events: ["payment"], secret: "abc", enabled: false });
+    const wh = createWebhook({
+      url: "https://example.com/hook",
+      events: ["payment"],
+      secret: "abc",
+      enabled: false,
+    });
     expect(wh.enabled).toBe(true);
   });
 

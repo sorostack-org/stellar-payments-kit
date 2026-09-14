@@ -27,13 +27,13 @@ export function generateKeypair(): { publicKey: string; secretKey: string } {
 export async function fundTestnetAccount(existingPublicKey: string): Promise<{ publicKey: string }>;
 export async function fundTestnetAccount(): Promise<{ publicKey: string; secretKey: string }>;
 export async function fundTestnetAccount(
-  existingPublicKey?: string
+  existingPublicKey?: string,
 ): Promise<{ publicKey: string; secretKey?: string }> {
   const keypair = existingPublicKey ? null : Keypair.random();
   const publicKey = existingPublicKey ?? keypair!.publicKey();
 
   const response = await fetch(
-    `https://friendbot.stellar.org?addr=${encodeURIComponent(publicKey)}`
+    `https://friendbot.stellar.org?addr=${encodeURIComponent(publicKey)}`,
   );
 
   if (!response.ok) {
@@ -41,9 +41,7 @@ export async function fundTestnetAccount(
     throw new Error(`Friendbot failed: ${response.status} ${text}`);
   }
 
-  return keypair
-    ? { publicKey, secretKey: keypair.secret() }
-    : { publicKey };
+  return keypair ? { publicKey, secretKey: keypair.secret() } : { publicKey };
 }
 
 /**
@@ -51,7 +49,7 @@ export async function fundTestnetAccount(
  */
 export async function getAccountInfo(
   publicKey: string,
-  network: StellarNetwork = "testnet"
+  network: StellarNetwork = "testnet",
 ): Promise<AccountInfo> {
   const server = getServer(network);
   const account = await server.loadAccount(publicKey);
@@ -76,7 +74,7 @@ export async function getAccountInfo(
  */
 export async function accountExists(
   publicKey: string,
-  network: StellarNetwork = "testnet"
+  network: StellarNetwork = "testnet",
 ): Promise<boolean> {
   try {
     const server = getServer(network);

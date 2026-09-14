@@ -12,14 +12,22 @@ describe("splitSecret", () => {
 
 describe("validateRecoveryConfig", () => {
   it("validates correct config", () => {
-    expect(validateRecoveryConfig({
-      m: 2, n: 3, guardians: ["a", "b", "c"],
-    })).toBe(true);
+    expect(
+      validateRecoveryConfig({
+        m: 2,
+        n: 3,
+        guardians: ["a", "b", "c"],
+      }),
+    ).toBe(true);
   });
 
   it("rejects invalid config", () => {
-    expect(validateRecoveryConfig({
-      m: 4, n: 3, guardians: ["a", "b", "c"],
-    })).toBe(false);
+    expect(
+      validateRecoveryConfig({
+        m: 4,
+        n: 3,
+        guardians: ["a", "b", "c"],
+      }),
+    ).toBe(false);
   });
 });

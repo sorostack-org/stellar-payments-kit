@@ -15,6 +15,7 @@ try {
 ```
 
 ## Error Codes
+
 - `ACCOUNT_NOT_FOUND` - Account doesn't exist on network
 - `INSUFFICIENT_BALANCE` - Not enough XLM/asset balance
 - `INVALID_AMOUNT` - Amount format is invalid

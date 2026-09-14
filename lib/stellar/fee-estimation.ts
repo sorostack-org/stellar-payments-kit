@@ -8,9 +8,7 @@ export interface FeeEstimate {
   lastLedgerBaseFee: string;
 }
 
-export async function estimateFee(
-  network: StellarNetwork = "testnet",
-): Promise<FeeEstimate> {
+export async function estimateFee(network: StellarNetwork = "testnet"): Promise<FeeEstimate> {
   const server = getServer(network);
 
   try {
@@ -31,9 +29,6 @@ export async function estimateFee(
   }
 }
 
-export function calculateOperationFee(
-  operationCount: number,
-  baseFee: string = BASE_FEE,
-): string {
+export function calculateOperationFee(operationCount: number, baseFee: string = BASE_FEE): string {
   return String(Number(baseFee) * operationCount);
 }

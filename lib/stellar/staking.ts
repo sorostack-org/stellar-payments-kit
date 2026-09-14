@@ -6,11 +6,7 @@ export interface StakePosition {
   apy: number;
 }
 
-export function calculateStakingRewards(
-  amount: string,
-  apy: number,
-  durationMs: number,
-): string {
+export function calculateStakingRewards(amount: string, apy: number, durationMs: number): string {
   const principal = Number(amount);
   const years = durationMs / (365.25 * 24 * 60 * 60 * 1000);
   const rate = apy / 100;
@@ -29,9 +25,6 @@ export function calculateApy(
   return (tr / ts) * epochsPerYear * 100;
 }
 
-export function isStakeUnlocked(
-  startTime: number,
-  lockupPeriodMs: number,
-): boolean {
+export function isStakeUnlocked(startTime: number, lockupPeriodMs: number): boolean {
   return Date.now() >= startTime + lockupPeriodMs;
 }

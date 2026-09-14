@@ -23,10 +23,7 @@ export function validateNFTMetadata(metadata: NFTMetadata): boolean {
   }
 }
 
-export function formatNFTIdentifier(
-  contractId: string,
-  tokenId: string,
-): string {
+export function formatNFTIdentifier(contractId: string, tokenId: string): string {
   return `${contractId}:${tokenId}`;
 }
 

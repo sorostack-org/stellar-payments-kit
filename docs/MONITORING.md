@@ -17,6 +17,7 @@
 ## Alerts
 
 Configure alerts for:
+
 - Failed transactions (>1% rate)
 - High latency (>10s P99)
 - Horizon connectivity issues

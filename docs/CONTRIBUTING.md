@@ -17,6 +17,7 @@ npm install
 ## Development
 
 ### TypeScript
+
 ```bash
 npm run dev          # Start Next.js dev server
 npm run test         # Run tests
@@ -25,6 +26,7 @@ npm run lint         # ESLint
 ```
 
 ### Rust
+
 ```bash
 cargo build --release --target wasm32-unknown-unknown
 cargo test --all-features

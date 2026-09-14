@@ -1,5 +1,9 @@
 import { describe, it, expect } from "vitest";
-import { calculateHealthFactor, calculateLiquidationPrice, isLiquidatable } from "@/lib/stellar/lending";
+import {
+  calculateHealthFactor,
+  calculateLiquidationPrice,
+  isLiquidatable,
+} from "@/lib/stellar/lending";
 
 describe("Lending", () => {
   describe("calculateHealthFactor", () => {

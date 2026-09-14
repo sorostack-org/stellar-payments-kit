@@ -1,5 +1,10 @@
 import { describe, it, expect } from "vitest";
-import { createProposal, castVote, getWinningOption, isProposalActive } from "@/lib/stellar/governance";
+import {
+  createProposal,
+  castVote,
+  getWinningOption,
+  isProposalActive,
+} from "@/lib/stellar/governance";
 
 describe("Governance", () => {
   describe("createProposal", () => {

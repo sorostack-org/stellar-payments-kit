@@ -33,10 +33,7 @@ export function createSimulation(
   };
 }
 
-export function estimateFeeFromOperations(
-  operationCount: number,
-  baseFee: string = "100",
-): string {
+export function estimateFeeFromOperations(operationCount: number, baseFee: string = "100"): string {
   return (BigInt(baseFee) * BigInt(operationCount)).toString();
 }
 

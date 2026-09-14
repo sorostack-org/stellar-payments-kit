@@ -1,9 +1,4 @@
-import {
-  Keypair,
-  TransactionBuilder,
-  Transaction,
-  FeeBumpTransaction,
-} from "@stellar/stellar-sdk";
+import { Keypair, TransactionBuilder, Transaction, FeeBumpTransaction } from "@stellar/stellar-sdk";
 import { getServer, getNetworkConfig, StellarNetwork } from "./network";
 
 export interface FeeBumpParams {
@@ -26,30 +21,20 @@ export interface FeeBumpResult {
  * Wraps an existing signed transaction in a fee-bump transaction,
  * allowing a sponsor account to pay the transaction fee on behalf of the user.
  */
-export async function buildFeeBumpTransaction(
-  params: FeeBumpParams
-): Promise<FeeBumpResult> {
-  const {
-    feeSourceSecret,
-    innerTransactionXdr,
-    baseFee = "200",
-    network = "testnet",
-  } = params;
+export async function buildFeeBumpTransaction(params: FeeBumpParams): Promise<FeeBumpResult> {
+  const { feeSourceSecret, innerTransactionXdr, baseFee = "200", network = "testnet" } = params;
 
   const feeKeypair = Keypair.fromSecret(feeSourceSecret);
   const server = getServer(network);
   const { networkPassphrase } = getNetworkConfig(network);
 
-  const innerTx = TransactionBuilder.fromXDR(
-    innerTransactionXdr,
-    networkPassphrase
-  ) as Transaction;
+  const innerTx = TransactionBuilder.fromXDR(innerTransactionXdr, networkPassphrase) as Transaction;
 
   const feeBumpTx = TransactionBuilder.buildFeeBumpTransaction(
     feeKeypair,
     baseFee,
     innerTx,
-    networkPassphrase
+    networkPassphrase,
   );
 
   feeBumpTx.sign(feeKeypair);
@@ -68,7 +53,7 @@ export async function buildFeeBumpTransaction(
  */
 export function decodeTransactionXdr(
   xdr: string,
-  network: StellarNetwork = "testnet"
+  network: StellarNetwork = "testnet",
 ): {
   sourceAccount: string;
   fee: string;
@@ -114,10 +99,7 @@ export function decodeTransactionXdr(
 /**
  * Returns the transaction detail URL on Stellar Expert for the given hash.
  */
-export function getExplorerUrl(
-  hash: string,
-  network: StellarNetwork = "testnet"
-): string {
+export function getExplorerUrl(hash: string, network: StellarNetwork = "testnet"): string {
   const net = network === "testnet" ? "testnet" : "public";
   return `https://stellar.expert/explorer/${net}/tx/${hash}`;
 }

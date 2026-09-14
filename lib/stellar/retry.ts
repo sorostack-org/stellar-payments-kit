@@ -14,10 +14,7 @@ const defaultOptions: Required<RetryOptions> = {
   retryableErrors: [],
 };
 
-export async function withRetry<T>(
-  fn: () => Promise<T>,
-  options: RetryOptions = {},
-): Promise<T> {
+export async function withRetry<T>(fn: () => Promise<T>, options: RetryOptions = {}): Promise<T> {
   const opts = { ...defaultOptions, ...options };
   let lastError: Error | null = null;
 

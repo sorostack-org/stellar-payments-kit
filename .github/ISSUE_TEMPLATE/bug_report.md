@@ -16,6 +16,7 @@ Steps to reproduce the behavior.
 A clear description of what you expected to happen.
 
 **Environment:**
+
 - stellar-payments-kit version:
 - Node.js version:
 - OS:

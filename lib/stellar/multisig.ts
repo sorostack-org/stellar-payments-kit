@@ -1,6 +1,4 @@
-import {
-  Keypair, TransactionBuilder, Operation, BASE_FEE,
-} from "@stellar/stellar-sdk";
+import { Keypair, TransactionBuilder, Operation, BASE_FEE } from "@stellar/stellar-sdk";
 import { getServer, getNetworkConfig, StellarNetwork } from "./network";
 
 export interface AddSignerParams {
@@ -10,9 +8,7 @@ export interface AddSignerParams {
   network?: StellarNetwork;
 }
 
-export async function addSigner(
-  params: AddSignerParams,
-): Promise<string> {
+export async function addSigner(params: AddSignerParams): Promise<string> {
   const { sourceSecret, signerPublicKey, weight, network = "testnet" } = params;
 
   const sourceKeypair = Keypair.fromSecret(sourceSecret);
@@ -21,14 +17,17 @@ export async function addSigner(
   const sourceAccount = await server.loadAccount(sourceKeypair.publicKey());
 
   const transaction = new TransactionBuilder(sourceAccount, {
-    fee: BASE_FEE, networkPassphrase,
+    fee: BASE_FEE,
+    networkPassphrase,
   })
-    .addOperation(Operation.setOptions({
-      signer: {
-        ed25519PublicKey: signerPublicKey,
-        weight,
-      },
-    }))
+    .addOperation(
+      Operation.setOptions({
+        signer: {
+          ed25519PublicKey: signerPublicKey,
+          weight,
+        },
+      }),
+    )
     .setTimeout(30)
     .build();
 
@@ -46,11 +45,13 @@ export interface ThresholdParams {
   network?: StellarNetwork;
 }
 
-export async function setThresholds(
-  params: ThresholdParams,
-): Promise<string> {
+export async function setThresholds(params: ThresholdParams): Promise<string> {
   const {
-    sourceSecret, masterWeight, lowThreshold, medThreshold, highThreshold,
+    sourceSecret,
+    masterWeight,
+    lowThreshold,
+    medThreshold,
+    highThreshold,
     network = "testnet",
   } = params;
 
@@ -66,7 +67,8 @@ export async function setThresholds(
   if (highThreshold !== undefined) opts.highThreshold = highThreshold;
 
   const transaction = new TransactionBuilder(sourceAccount, {
-    fee: BASE_FEE, networkPassphrase,
+    fee: BASE_FEE,
+    networkPassphrase,
   })
     .addOperation(Operation.setOptions(opts as any))
     .setTimeout(30)

@@ -10,15 +10,14 @@ export class PaymentChannel {
     this.network = network;
   }
 
-  async buildSignedTransaction(
-    operations: any[],
-  ): Promise<string> {
+  async buildSignedTransaction(operations: any[]): Promise<string> {
     const server = getServer(this.network);
     const { networkPassphrase } = getNetworkConfig(this.network);
     const account = await server.loadAccount(this.sourceKeypair.publicKey());
 
     const builder = new TransactionBuilder(account, {
-      fee: BASE_FEE, networkPassphrase,
+      fee: BASE_FEE,
+      networkPassphrase,
     });
 
     for (const op of operations) {

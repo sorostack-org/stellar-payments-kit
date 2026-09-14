@@ -6,10 +6,7 @@ export interface SorobanTokenInfo {
   contractId: string;
 }
 
-export function parseSorobanTokenResponse(
-  response: string,
-  contractId: string,
-): SorobanTokenInfo {
+export function parseSorobanTokenResponse(response: string, contractId: string): SorobanTokenInfo {
   const parsed = JSON.parse(response);
   return {
     name: parsed.name ?? "",
@@ -20,20 +17,14 @@ export function parseSorobanTokenResponse(
   };
 }
 
-export function formatTokenAmount(
-  amount: string,
-  decimals: number,
-): string {
+export function formatTokenAmount(amount: string, decimals: number): string {
   const padded = amount.padStart(decimals + 1, "0");
   const intPart = padded.slice(0, padded.length - decimals) || "0";
   const decPart = padded.slice(padded.length - decimals);
   return `${intPart}.${decPart}`;
 }
 
-export function parseTokenAmount(
-  formatted: string,
-  decimals: number,
-): string {
+export function parseTokenAmount(formatted: string, decimals: number): string {
   const parts = formatted.split(".");
   const intPart = parts[0] ?? "0";
   const decPart = (parts[1] ?? "").padEnd(decimals, "0").slice(0, decimals);

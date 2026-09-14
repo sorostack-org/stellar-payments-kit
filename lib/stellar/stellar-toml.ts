@@ -57,7 +57,10 @@ function parseToml(text: string): StellarToml {
     if (eqIdx === -1) continue;
 
     const key = trimmed.slice(0, eqIdx).trim();
-    const value = trimmed.slice(eqIdx + 1).trim().replace(/^["']|["']$/g, "");
+    const value = trimmed
+      .slice(eqIdx + 1)
+      .trim()
+      .replace(/^["']|["']$/g, "");
 
     if (currentSection === "general") {
       const keyMap: Record<string, keyof StellarToml> = {

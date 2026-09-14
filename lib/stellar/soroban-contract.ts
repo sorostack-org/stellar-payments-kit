@@ -12,14 +12,8 @@ export function createContractInstance(
   return { contractId, networkPassphrase, rpcUrl };
 }
 
-export function formatContractCall(
-  contractId: string,
-  method: string,
-  args: unknown[],
-): string {
-  const serialized = args.map((a) =>
-    typeof a === "object" ? JSON.stringify(a) : String(a),
-  );
+export function formatContractCall(contractId: string, method: string, args: unknown[]): string {
+  const serialized = args.map((a) => (typeof a === "object" ? JSON.stringify(a) : String(a)));
   return `${contractId}:${method}(${serialized.join(",")})`;
 }
 

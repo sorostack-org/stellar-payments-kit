@@ -10,7 +10,9 @@ interface AccountInfoState {
 
 export function useAccountInfo() {
   const [state, setState] = useState<AccountInfoState>({
-    info: null, error: null, loading: false,
+    info: null,
+    error: null,
+    loading: false,
   });
 
   const fetch = useCallback(async (publicKey: string) => {

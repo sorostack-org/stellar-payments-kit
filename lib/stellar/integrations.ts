@@ -4,11 +4,7 @@ export interface IntegrationProvider {
   apiKey: string;
 }
 
-export function createProvider(
-  name: string,
-  baseUrl: string,
-  apiKey: string,
-): IntegrationProvider {
+export function createProvider(name: string, baseUrl: string, apiKey: string): IntegrationProvider {
   return { name, baseUrl, apiKey };
 }
 

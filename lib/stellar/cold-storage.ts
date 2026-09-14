@@ -13,14 +13,18 @@ export async function createColdStorageAccount(
   const account = await server.loadAccount(keypair.publicKey());
 
   const tx = new TransactionBuilder(account, { fee: BASE_FEE, networkPassphrase })
-    .addOperation(Operation.createAccount({
-      destination: coldPublicKey,
-      startingBalance,
-    }))
-    .addOperation(Operation.setOptions({
-      source: coldPublicKey,
-      setFlags: 4,
-    }))
+    .addOperation(
+      Operation.createAccount({
+        destination: coldPublicKey,
+        startingBalance,
+      }),
+    )
+    .addOperation(
+      Operation.setOptions({
+        source: coldPublicKey,
+        setFlags: 4,
+      }),
+    )
     .setTimeout(30)
     .build();
 

@@ -1,9 +1,5 @@
 import { describe, it, expect } from "vitest";
-import {
-  calculateSwapOutput,
-  calculatePoolShare,
-  calculateLpTokens,
-} from "@/lib/stellar/amm";
+import { calculateSwapOutput, calculatePoolShare, calculateLpTokens } from "@/lib/stellar/amm";
 
 describe("AMM", () => {
   describe("calculateSwapOutput", () => {

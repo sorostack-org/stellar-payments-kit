@@ -14,9 +14,7 @@ export interface SetOptionsParams {
   network?: StellarNetwork;
 }
 
-export async function setAccountOptions(
-  params: SetOptionsParams,
-): Promise<string> {
+export async function setAccountOptions(params: SetOptionsParams): Promise<string> {
   const { sourceSecret, network = "testnet", ...options } = params;
 
   const keypair = Keypair.fromSecret(sourceSecret);

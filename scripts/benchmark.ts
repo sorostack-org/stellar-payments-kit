@@ -14,16 +14,24 @@ export async function runBenchmark(
 
 export async function benchmarkKeyGeneration(): Promise<void> {
   const { generateKeypair } = await import("../lib/stellar/accounts");
-  await runBenchmark("generateKeypair", async () => {
-    generateKeypair();
-  }, 50);
+  await runBenchmark(
+    "generateKeypair",
+    async () => {
+      generateKeypair();
+    },
+    50,
+  );
 }
 
 export async function benchmarkValidation(): Promise<void> {
   const { isValidPublicKey } = await import("../lib/stellar/validation");
-  await runBenchmark("isValidPublicKey (valid)", async () => {
-    isValidPublicKey("GA5ZSEJYB37JRC5AVCIA5MOP4RHTM335X2KGX3IHOJAPP5W34");
-  }, 200);
+  await runBenchmark(
+    "isValidPublicKey (valid)",
+    async () => {
+      isValidPublicKey("GA5ZSEJYB37JRC5AVCIA5MOP4RHTM335X2KGX3IHOJAPP5W34");
+    },
+    200,
+  );
 }
 
 if (require.main === module) {

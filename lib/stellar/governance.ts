@@ -30,11 +30,7 @@ export function createProposal(
   };
 }
 
-export function castVote(
-  proposal: Proposal,
-  option: string,
-  weight: number,
-): Proposal {
+export function castVote(proposal: Proposal, option: string, weight: number): Proposal {
   if (Date.now() > proposal.endTime) throw new Error("Voting period ended");
   if (!proposal.options.includes(option)) throw new Error("Invalid option");
   return {

@@ -1,5 +1,10 @@
 import { describe, it, expect } from "vitest";
-import { calculateMinFee, calculateMaxFee, estimateSorobanFee, formatFee } from "@/lib/stellar/fees";
+import {
+  calculateMinFee,
+  calculateMaxFee,
+  estimateSorobanFee,
+  formatFee,
+} from "@/lib/stellar/fees";
 
 describe("Fees", () => {
   describe("calculateMinFee", () => {

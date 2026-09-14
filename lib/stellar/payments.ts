@@ -37,9 +37,7 @@ export interface PaymentResult {
 /**
  * Sends a native XLM payment from one account to another.
  */
-export async function sendPayment(
-  params: PaymentParams
-): Promise<PaymentResult> {
+export async function sendPayment(params: PaymentParams): Promise<PaymentResult> {
   const { sourceSecret, destinationPublicKey, amount, memo, network = "testnet" } = params;
 
   const sourceKeypair = Keypair.fromSecret(sourceSecret);
@@ -56,7 +54,7 @@ export async function sendPayment(
       destination: destinationPublicKey,
       asset: Asset.native(),
       amount,
-    })
+    }),
   );
 
   if (memo) {
@@ -78,9 +76,7 @@ export async function sendPayment(
  * Sends a custom asset payment from one account to another.
  * The destination must have a trustline for the asset.
  */
-export async function sendAssetPayment(
-  params: AssetPaymentParams
-): Promise<PaymentResult> {
+export async function sendAssetPayment(params: AssetPaymentParams): Promise<PaymentResult> {
   const {
     sourceSecret,
     destinationPublicKey,
@@ -106,7 +102,7 @@ export async function sendAssetPayment(
       destination: destinationPublicKey,
       asset,
       amount,
-    })
+    }),
   );
 
   if (memo) {

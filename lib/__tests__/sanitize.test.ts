@@ -1,5 +1,11 @@
 import { describe, it, expect } from "vitest";
-import { sanitizePublicKey, sanitizeAmount, sanitizeMemo, sanitizeAssetCode, sanitizeDomain } from "@/lib/stellar/sanitize";
+import {
+  sanitizePublicKey,
+  sanitizeAmount,
+  sanitizeMemo,
+  sanitizeAssetCode,
+  sanitizeDomain,
+} from "@/lib/stellar/sanitize";
 
 describe("sanitize", () => {
   describe("sanitizePublicKey", () => {

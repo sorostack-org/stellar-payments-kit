@@ -1,5 +1,11 @@
 import { describe, it, expect } from "vitest";
-import { formatStroops, formatLumens, shortenKey, formatBalance, parseAssetString } from "@/lib/stellar/format";
+import {
+  formatStroops,
+  formatLumens,
+  shortenKey,
+  formatBalance,
+  parseAssetString,
+} from "@/lib/stellar/format";
 
 describe("formatStroops", () => {
   it("converts lumens to stroops", () => {

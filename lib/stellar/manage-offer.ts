@@ -11,12 +11,8 @@ export interface ManageSellOfferParams {
   network?: StellarNetwork;
 }
 
-export async function manageSellOffer(
-  params: ManageSellOfferParams,
-): Promise<string> {
-  const {
-    sourceSecret, selling, buying, amount, price, offerId = 0, network = "testnet",
-  } = params;
+export async function manageSellOffer(params: ManageSellOfferParams): Promise<string> {
+  const { sourceSecret, selling, buying, amount, price, offerId = 0, network = "testnet" } = params;
 
   const keypair = Keypair.fromSecret(sourceSecret);
   const server = getServer(network);
@@ -27,13 +23,15 @@ export async function manageSellOffer(
   const buyingAsset = new Asset(buying.code, buying.issuer);
 
   const tx = new TransactionBuilder(account, { fee: BASE_FEE, networkPassphrase })
-    .addOperation(Operation.manageSellOffer({
-      selling: sellingAsset,
-      buying: buyingAsset,
-      amount,
-      price,
-      offerId,
-    }))
+    .addOperation(
+      Operation.manageSellOffer({
+        selling: sellingAsset,
+        buying: buyingAsset,
+        amount,
+        price,
+        offerId,
+      }),
+    )
     .setTimeout(30)
     .build();
 

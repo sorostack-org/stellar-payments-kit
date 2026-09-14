@@ -9,9 +9,7 @@ export interface SetupEscrowParams {
   network?: StellarNetwork;
 }
 
-export async function setupEscrowAccount(
-  params: SetupEscrowParams,
-): Promise<string> {
+export async function setupEscrowAccount(params: SetupEscrowParams): Promise<string> {
   const { sourceSecret, escrowPublicKey, amount, asset: assetParam, network = "testnet" } = params;
 
   const keypair = Keypair.fromSecret(sourceSecret);
@@ -22,15 +20,19 @@ export async function setupEscrowAccount(
   const asset = assetParam ? new Asset(assetParam.code, assetParam.issuer) : Asset.native();
 
   const tx = new TransactionBuilder(account, { fee: BASE_FEE, networkPassphrase })
-    .addOperation(Operation.createAccount({
-      destination: escrowPublicKey,
-      startingBalance: "2",
-    }))
-    .addOperation(Operation.payment({
-      destination: escrowPublicKey,
-      asset,
-      amount,
-    }))
+    .addOperation(
+      Operation.createAccount({
+        destination: escrowPublicKey,
+        startingBalance: "2",
+      }),
+    )
+    .addOperation(
+      Operation.payment({
+        destination: escrowPublicKey,
+        asset,
+        amount,
+      }),
+    )
     .setTimeout(30)
     .build();
 

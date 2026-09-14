@@ -1,5 +1,11 @@
 import { describe, it, expect } from "vitest";
-import { createIdentityManager, addIdentity, removeIdentity, setDefaultIdentity, getDefaultIdentity } from "@/lib/stellar/identity";
+import {
+  createIdentityManager,
+  addIdentity,
+  removeIdentity,
+  setDefaultIdentity,
+  getDefaultIdentity,
+} from "@/lib/stellar/identity";
 
 describe("Identity", () => {
   it("creates empty manager", () => {

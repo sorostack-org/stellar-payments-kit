@@ -12,11 +12,7 @@ export class PaymentEventStream {
   private handler: StreamHandler<any>;
   private es: EventSource | null = null;
 
-  constructor(
-    serverUrl: string,
-    accountId: string,
-    handler: StreamHandler<any>,
-  ) {
+  constructor(serverUrl: string, accountId: string, handler: StreamHandler<any>) {
     this.server = new Horizon.Server(serverUrl);
     this.accountId = accountId;
     this.handler = handler;

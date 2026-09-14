@@ -1,5 +1,9 @@
 import { describe, it, expect } from "vitest";
-import { createSimulation, estimateFeeFromOperations, validateSimulationResult } from "@/lib/stellar/simulation";
+import {
+  createSimulation,
+  estimateFeeFromOperations,
+  validateSimulationResult,
+} from "@/lib/stellar/simulation";
 
 describe("Simulation", () => {
   describe("createSimulation", () => {

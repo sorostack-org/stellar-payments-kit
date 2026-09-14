@@ -1,6 +1,4 @@
-import {
-  Keypair, TransactionBuilder, Operation, Asset, BASE_FEE,
-} from "@stellar/stellar-sdk";
+import { Keypair, TransactionBuilder, Operation, Asset, BASE_FEE } from "@stellar/stellar-sdk";
 import { getServer, getNetworkConfig, StellarNetwork } from "./network";
 
 export interface RecurringPaymentConfig {

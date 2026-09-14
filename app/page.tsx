@@ -10,9 +10,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-gray-950 text-gray-100 p-6 md:p-10">
       <header className="max-w-3xl mx-auto mb-10">
-        <h1 className="text-3xl font-bold text-white mb-2">
-          Stellar Payments Kit
-        </h1>
+        <h1 className="text-3xl font-bold text-white mb-2">Stellar Payments Kit</h1>
         <p className="text-gray-400 text-sm">
           Interactive demo — explore Stellar network utilities on Testnet.
         </p>
@@ -33,9 +31,7 @@ export default function Home() {
               key={id}
               onClick={() => setActiveTab(id)}
               className={`px-4 py-2 rounded-t text-sm font-medium transition-colors ${
-                activeTab === id
-                  ? "bg-indigo-600 text-white"
-                  : "text-gray-400 hover:text-white"
+                activeTab === id ? "bg-indigo-600 text-white" : "text-gray-400 hover:text-white"
               }`}
             >
               {label}
@@ -198,9 +194,7 @@ function PaymentPanel() {
       </p>
       <div className="space-y-3">
         <div>
-          <label className="block text-sm text-gray-300 mb-1">
-            Source Secret Key
-          </label>
+          <label className="block text-sm text-gray-300 mb-1">Source Secret Key</label>
           <input
             type="password"
             value={secret}
@@ -210,9 +204,7 @@ function PaymentPanel() {
           />
         </div>
         <div>
-          <label className="block text-sm text-gray-300 mb-1">
-            Destination Public Key
-          </label>
+          <label className="block text-sm text-gray-300 mb-1">Destination Public Key</label>
           <input
             type="text"
             value={destination}
@@ -232,9 +224,7 @@ function PaymentPanel() {
           />
         </div>
         <div>
-          <label className="block text-sm text-gray-300 mb-1">
-            Memo (optional)
-          </label>
+          <label className="block text-sm text-gray-300 mb-1">Memo (optional)</label>
           <input
             type="text"
             value={memo}
@@ -333,9 +323,7 @@ function AccountInfoPanel() {
                 key={b.asset}
                 className="flex justify-between bg-gray-800 rounded px-3 py-2 text-sm"
               >
-                <span className="text-gray-400 font-mono truncate mr-4">
-                  {b.asset}
-                </span>
+                <span className="text-gray-400 font-mono truncate mr-4">{b.asset}</span>
                 <span className="text-white font-mono">{b.balance}</span>
               </div>
             ))}

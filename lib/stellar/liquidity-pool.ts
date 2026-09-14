@@ -1,6 +1,4 @@
-import {
-  Keypair, TransactionBuilder, Operation, Asset, BASE_FEE,
-} from "@stellar/stellar-sdk";
+import { Keypair, TransactionBuilder, Operation, Asset, BASE_FEE } from "@stellar/stellar-sdk";
 import { getServer, getNetworkConfig, StellarNetwork } from "./network";
 
 export interface LiquidityPoolParams {
@@ -14,12 +12,16 @@ export interface LiquidityPoolParams {
   network?: StellarNetwork;
 }
 
-export async function depositLiquidityPool(
-  params: LiquidityPoolParams,
-): Promise<string> {
+export async function depositLiquidityPool(params: LiquidityPoolParams): Promise<string> {
   const {
-    sourceSecret, assetA, assetB, depositAmountA, depositAmountB,
-    minPrice, maxPrice, network = "testnet",
+    sourceSecret,
+    assetA,
+    assetB,
+    depositAmountA,
+    depositAmountB,
+    minPrice,
+    maxPrice,
+    network = "testnet",
   } = params;
 
   const sourceKeypair = Keypair.fromSecret(sourceSecret);
@@ -31,15 +33,18 @@ export async function depositLiquidityPool(
   const assetBObj = new Asset(assetB.code, assetB.issuer);
 
   const transaction = new TransactionBuilder(sourceAccount, {
-    fee: BASE_FEE, networkPassphrase,
+    fee: BASE_FEE,
+    networkPassphrase,
   })
-    .addOperation(Operation.liquidityPoolDeposit({
-      liquidityPoolId: "0000000000000000000000000000000000000000000000000000000000000000",
-      maxAmountA: depositAmountA,
-      maxAmountB: depositAmountB,
-      minPrice: { n: 1, d: 1 },
-      maxPrice: { n: 1, d: 1 },
-    }))
+    .addOperation(
+      Operation.liquidityPoolDeposit({
+        liquidityPoolId: "0000000000000000000000000000000000000000000000000000000000000000",
+        maxAmountA: depositAmountA,
+        maxAmountB: depositAmountB,
+        minPrice: { n: 1, d: 1 },
+        maxPrice: { n: 1, d: 1 },
+      }),
+    )
     .setTimeout(30)
     .build();
 
