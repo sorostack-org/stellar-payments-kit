@@ -44,7 +44,7 @@ export async function buildFeeBumpTransaction(params: FeeBumpParams): Promise<Fe
   return {
     hash: result.hash,
     ledger: result.ledger,
-    innerHash: innerTx.hash().toString("hex"),
+    innerHash: Buffer.from(innerTx.hash()).toString("hex"),
   };
 }
 
@@ -71,7 +71,7 @@ export function decodeTransactionXdr(
     if (!memo || memo.type === "none") return "";
     const v = memo.value;
     if (v === null || v === undefined) return "";
-    if (Buffer.isBuffer(v)) return v.toString("utf8");
+    if (v instanceof Uint8Array) return new TextDecoder().decode(v);
     return String(v);
   }
 

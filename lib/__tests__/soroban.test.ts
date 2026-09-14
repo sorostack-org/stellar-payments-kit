@@ -40,10 +40,10 @@ describe("invokeSorobanContract", () => {
 
     const tx = submitTx.mock.calls[0][0] as { toXDR: (fmt: string) => string };
     const envelope = xdr.TransactionEnvelope.fromXDR(tx.toXDR("base64"), "base64");
-    const ops = envelope.v1().tx().operations();
+    if (envelope.type !== "envelopeTypeTx") throw new Error("expected v1 envelope");
+    const ops = envelope.v1.tx.operations;
     expect(ops).toHaveLength(1);
 
-    const body = ops[0].body();
-    expect(body.switch().name).toBe("invokeHostFunction");
+    expect(ops[0].body.type).toBe("invokeHostFunction");
   });
 });

@@ -27,7 +27,9 @@ function mockServer() {
 
 function operationsOf(submitTx: ReturnType<typeof vi.fn>) {
   const tx = submitTx.mock.calls[0][0] as { toXDR: (fmt: string) => string };
-  return xdr.TransactionEnvelope.fromXDR(tx.toXDR("base64"), "base64").v1().tx().operations();
+  const envelope = xdr.TransactionEnvelope.fromXDR(tx.toXDR("base64"), "base64");
+  if (envelope.type !== "envelopeTypeTx") throw new Error("expected v1 envelope");
+  return envelope.v1.tx.operations;
 }
 
 describe("sendBatchPayment", () => {
@@ -72,7 +74,7 @@ describe("sendBatchPayment", () => {
     const ops = operationsOf(submitTx);
     expect(ops).toHaveLength(3);
     for (const op of ops) {
-      expect(op.body().switch().name).toBe("payment");
+      expect(op.body.type).toBe("payment");
     }
   });
 
@@ -86,8 +88,8 @@ describe("sendBatchPayment", () => {
       network: "testnet",
     });
 
-    const tx = submitTx.mock.calls[0][0] as { memo: { _type: string; value: string } };
+    const tx = submitTx.mock.calls[0][0] as { memo: { _type: string; _value: Uint8Array } };
     expect(tx.memo._type).toBe("text");
-    expect(tx.memo.value).toBe("payout");
+    expect(new TextDecoder().decode(tx.memo._value)).toBe("payout");
   });
 });
