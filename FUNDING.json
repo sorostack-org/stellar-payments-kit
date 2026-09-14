@@ -2,11 +2,11 @@
   "version": "v1",
   "name": "Stellar Payments Kit",
   "description": "A lightweight TypeScript toolkit for building payment flows on the Stellar network.",
-  "repository": "https://github.com/Sorostack/stellar-payments-kit",
+  "repository": "https://github.com/sorostack-org/stellar-payments-kit",
   "funding": {
     "drips": {
       "ethereum": {
-        "ownedBy": "https://github.com/Sorostack/stellar-payments-kit"
+        "ownedBy": "https://github.com/sorostack-org/stellar-payments-kit"
       }
     }
   },

@@ -3,14 +3,14 @@
 A lightweight, developer-friendly toolkit for building payment flows on the [Stellar](https://stellar.org) network. Includes a TypeScript library, Soroban smart contracts, and an interactive demo app.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![TypeScript CI](https://github.com/Sorostack/stellar-payments-kit/actions/workflows/ci-typescript.yml/badge.svg)](https://github.com/Sorostack/stellar-payments-kit/actions/workflows/ci-typescript.yml)
-[![Rust CI](https://github.com/Sorostack/stellar-payments-kit/actions/workflows/ci-rust.yml/badge.svg)](https://github.com/Sorostack/stellar-payments-kit/actions/workflows/ci-rust.yml)
-[![Tests](https://github.com/Sorostack/stellar-payments-kit/actions/workflows/ci-tests.yml/badge.svg)](https://github.com/Sorostack/stellar-payments-kit/actions/workflows/ci-tests.yml)
-[![Open Issues](https://img.shields.io/github/issues/Sorostack/stellar-payments-kit)](https://github.com/Sorostack/stellar-payments-kit/issues)
+[![TypeScript CI](https://github.com/sorostack-org/stellar-payments-kit/actions/workflows/ci-typescript.yml/badge.svg)](https://github.com/sorostack-org/stellar-payments-kit/actions/workflows/ci-typescript.yml)
+[![Rust CI](https://github.com/sorostack-org/stellar-payments-kit/actions/workflows/ci-rust.yml/badge.svg)](https://github.com/sorostack-org/stellar-payments-kit/actions/workflows/ci-rust.yml)
+[![Tests](https://github.com/sorostack-org/stellar-payments-kit/actions/workflows/ci-tests.yml/badge.svg)](https://github.com/sorostack-org/stellar-payments-kit/actions/workflows/ci-tests.yml)
+[![Open Issues](https://img.shields.io/github/issues/sorostack-org/stellar-payments-kit)](https://github.com/sorostack-org/stellar-payments-kit/issues)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 [![npm version](https://img.shields.io/npm/v/stellar-payments-kit)](https://www.npmjs.com/package/stellar-payments-kit)
-[![codecov](https://codecov.io/gh/Sorostack/stellar-payments-kit/branch/main/graph/badge.svg)](https://codecov.io/gh/Sorostack/stellar-payments-kit)
-[![Maintainability](https://img.shields.io/codeclimate/maintainability/Sorostack/stellar-payments-kit)](https://codeclimate.com/github/Sorostack/stellar-payments-kit)
+[![codecov](https://codecov.io/gh/sorostack-org/stellar-payments-kit/branch/main/graph/badge.svg)](https://codecov.io/gh/sorostack-org/stellar-payments-kit)
+[![Maintainability](https://img.shields.io/codeclimate/maintainability/sorostack-org/stellar-payments-kit)](https://codeclimate.com/github/sorostack-org/stellar-payments-kit)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 
 ---
@@ -71,7 +71,7 @@ Built with Next.js — explore all features via a clean tabbed interface.
 ### Installation
 
 ```bash
-git clone https://github.com/Sorostack/stellar-payments-kit.git
+git clone https://github.com/sorostack-org/stellar-payments-kit.git
 cd stellar-payments-kit
 npm install
 ```
@@ -193,16 +193,16 @@ stellar-payments-kit/
 
 | Workflow | Status |
 |---|---|---|
-| TypeScript CI (typecheck, lint, build) | [![TypeScript CI](https://github.com/Sorostack/stellar-payments-kit/actions/workflows/ci-typescript.yml/badge.svg)](https://github.com/Sorostack/stellar-payments-kit/actions/workflows/ci-typescript.yml) |
-| Rust CI (fmt, clippy, build, test) | [![Rust CI](https://github.com/Sorostack/stellar-payments-kit/actions/workflows/ci-rust.yml/badge.svg)](https://github.com/Sorostack/stellar-payments-kit/actions/workflows/ci-rust.yml) |
-| Tests (sharded, coverage) | [![Tests](https://github.com/Sorostack/stellar-payments-kit/actions/workflows/ci-tests.yml/badge.svg)](https://github.com/Sorostack/stellar-payments-kit/actions/workflows/ci-tests.yml) |
-| Coverage | [![Coverage](https://github.com/Sorostack/stellar-payments-kit/actions/workflows/ci-coverage.yml/badge.svg)](https://github.com/Sorostack/stellar-payments-kit/actions/workflows/ci-coverage.yml) |
-| Security Audit | [![Security Audit](https://github.com/Sorostack/stellar-payments-kit/actions/workflows/security-audit.yml/badge.svg)](https://github.com/Sorostack/stellar-payments-kit/actions/workflows/security-audit.yml) |
-| Benchmark | [![Benchmark](https://github.com/Sorostack/stellar-payments-kit/actions/workflows/benchmark.yml/badge.svg)](https://github.com/Sorostack/stellar-payments-kit/actions/workflows/benchmark.yml) |
-| CodeQL | [![CodeQL](https://github.com/Sorostack/stellar-payments-kit/actions/workflows/codeql.yml/badge.svg)](https://github.com/Sorostack/stellar-payments-kit/actions/workflows/codeql.yml) |
-| Deploy Docs | [![Docs](https://github.com/Sorostack/stellar-payments-kit/actions/workflows/deploy-docs.yml/badge.svg)](https://github.com/Sorostack/stellar-payments-kit/actions/workflows/deploy-docs.yml) |
-| Scorecard | [![Scorecard](https://github.com/Sorostack/stellar-payments-kit/actions/workflows/scorecard.yml/badge.svg)](https://github.com/Sorostack/stellar-payments-kit/actions/workflows/scorecard.yml) |
-| Sync Labels | [![Labels](https://github.com/Sorostack/stellar-payments-kit/actions/workflows/sync-labels.yml/badge.svg)](https://github.com/Sorostack/stellar-payments-kit/actions/workflows/sync-labels.yml) |
+| TypeScript CI (typecheck, lint, build) | [![TypeScript CI](https://github.com/sorostack-org/stellar-payments-kit/actions/workflows/ci-typescript.yml/badge.svg)](https://github.com/sorostack-org/stellar-payments-kit/actions/workflows/ci-typescript.yml) |
+| Rust CI (fmt, clippy, build, test) | [![Rust CI](https://github.com/sorostack-org/stellar-payments-kit/actions/workflows/ci-rust.yml/badge.svg)](https://github.com/sorostack-org/stellar-payments-kit/actions/workflows/ci-rust.yml) |
+| Tests (sharded, coverage) | [![Tests](https://github.com/sorostack-org/stellar-payments-kit/actions/workflows/ci-tests.yml/badge.svg)](https://github.com/sorostack-org/stellar-payments-kit/actions/workflows/ci-tests.yml) |
+| Coverage | [![Coverage](https://github.com/sorostack-org/stellar-payments-kit/actions/workflows/ci-coverage.yml/badge.svg)](https://github.com/sorostack-org/stellar-payments-kit/actions/workflows/ci-coverage.yml) |
+| Security Audit | [![Security Audit](https://github.com/sorostack-org/stellar-payments-kit/actions/workflows/security-audit.yml/badge.svg)](https://github.com/sorostack-org/stellar-payments-kit/actions/workflows/security-audit.yml) |
+| Benchmark | [![Benchmark](https://github.com/sorostack-org/stellar-payments-kit/actions/workflows/benchmark.yml/badge.svg)](https://github.com/sorostack-org/stellar-payments-kit/actions/workflows/benchmark.yml) |
+| CodeQL | [![CodeQL](https://github.com/sorostack-org/stellar-payments-kit/actions/workflows/codeql.yml/badge.svg)](https://github.com/sorostack-org/stellar-payments-kit/actions/workflows/codeql.yml) |
+| Deploy Docs | [![Docs](https://github.com/sorostack-org/stellar-payments-kit/actions/workflows/deploy-docs.yml/badge.svg)](https://github.com/sorostack-org/stellar-payments-kit/actions/workflows/deploy-docs.yml) |
+| Scorecard | [![Scorecard](https://github.com/sorostack-org/stellar-payments-kit/actions/workflows/scorecard.yml/badge.svg)](https://github.com/sorostack-org/stellar-payments-kit/actions/workflows/scorecard.yml) |
+| Sync Labels | [![Labels](https://github.com/sorostack-org/stellar-payments-kit/actions/workflows/sync-labels.yml/badge.svg)](https://github.com/sorostack-org/stellar-payments-kit/actions/workflows/sync-labels.yml) |
 
 ---
 
@@ -238,4 +238,4 @@ Full documentation is available in the [docs/](docs/) directory including archit
 
 ## License
 
-[MIT](LICENSE) © Sorostack
+[MIT](LICENSE) © sorostack-org

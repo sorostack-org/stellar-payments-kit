@@ -3,15 +3,15 @@
   "version": "0.1.0",
   "description": "A lightweight TypeScript toolkit for building payment flows on the Stellar network.",
   "keywords": ["stellar", "payments", "blockchain", "typescript", "soroban", "xlm", "sdk"],
-  "author": "Sorostack",
+  "author": "sorostack-org",
   "license": "MIT",
-  "homepage": "https://github.com/Sorostack/stellar-payments-kit#readme",
+  "homepage": "https://github.com/sorostack-org/stellar-payments-kit#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Sorostack/stellar-payments-kit.git"
+    "url": "https://github.com/sorostack-org/stellar-payments-kit.git"
   },
   "bugs": {
-    "url": "https://github.com/Sorostack/stellar-payments-kit/issues"
+    "url": "https://github.com/sorostack-org/stellar-payments-kit/issues"
   },
   "scripts": {
     "dev": "next dev",

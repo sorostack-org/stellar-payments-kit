@@ -8,7 +8,8 @@ This version has breaking changes — APIs, conventions, and file structure may 
 ## Work State
 
 ### Objective
-Reach 100+ commits and maintain active development (GrantFox criteria). Current: 139 commits on `main`.
+Build a genuinely useful, well-tested Stellar payments library and set of smart contracts.
+Every commit must be a real, reviewable change; never fabricate activity or commit counts.
 
 ### Key Constraints
 - Windows PowerShell 5.1 — no `&&`, one git command at a time

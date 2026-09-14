@@ -17,12 +17,12 @@ export const metadata: Metadata = {
   description:
     "A lightweight TypeScript toolkit for building payment flows on the Stellar network. Supports XLM transfers, custom assets, fee-bump transactions, and more.",
   keywords: ["stellar", "payments", "blockchain", "sdk", "typescript", "soroban"],
-  authors: [{ name: "Sorostack", url: "https://github.com/Sorostack" }],
+  authors: [{ name: "sorostack-org", url: "https://github.com/sorostack-org" }],
   openGraph: {
     title: "Stellar Payments Kit",
     description:
       "Composable utilities for Stellar network payments — accounts, assets, fee-bump transactions, and more.",
-    url: "https://github.com/Sorostack/stellar-payments-kit",
+    url: "https://github.com/sorostack-org/stellar-payments-kit",
     type: "website",
   },
 };

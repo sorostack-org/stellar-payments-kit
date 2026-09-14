@@ -1,7 +1,7 @@
 # Maintainers
 
 ## Current Maintainers
-- @Sorostack - Project lead
+- @sorostack-org - Project lead
 
 ## Responsibilities
 - Review and merge pull requests

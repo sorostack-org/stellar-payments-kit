@@ -9,7 +9,7 @@
 ## Setup
 
 ```bash
-git clone https://github.com/Sorostack/stellar-payments-kit.git
+git clone https://github.com/sorostack-org/stellar-payments-kit.git
 cd stellar-payments-kit
 npm install
 ```
