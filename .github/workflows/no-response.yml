@@ -12,7 +12,7 @@ jobs:
     permissions:
       issues: write
     steps:
-      - uses: lee-dohm/no-response@v0.5
+      - uses: lee-dohm/no-response@v0.5.0
         with:
           token: ${{ github.token }}
           closeDays: 14
