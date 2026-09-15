@@ -11,6 +11,7 @@ vi.mock("@/lib/stellar/network", () => ({
 
 import { getServer } from "@/lib/stellar/network";
 import { sendBatchPayment } from "@/lib/stellar/batch";
+import { ValidationError } from "@/lib/stellar/errors";
 
 function mockServer() {
   const kp = Keypair.random();
@@ -52,6 +53,38 @@ describe("sendBatchPayment", () => {
     await expect(sendBatchPayment({ sourceSecret: kp.secret(), payments: [] })).rejects.toThrow(
       "at least one",
     );
+  });
+
+  it("throws ValidationError for an invalid destination public key", async () => {
+    const { kp } = mockServer();
+    await expect(
+      sendBatchPayment({
+        sourceSecret: kp.secret(),
+        payments: [{ destinationPublicKey: "GABC1", amount: "10" }],
+      }),
+    ).rejects.toBeInstanceOf(ValidationError);
+  });
+
+  it("throws ValidationError for an invalid amount", async () => {
+    const { kp } = mockServer();
+    await expect(
+      sendBatchPayment({
+        sourceSecret: kp.secret(),
+        payments: [{ destinationPublicKey: Keypair.random().publicKey(), amount: "abc" }],
+      }),
+    ).rejects.toBeInstanceOf(ValidationError);
+  });
+
+  it("throws ValidationError for an invalid asset issuer", async () => {
+    const { kp } = mockServer();
+    await expect(
+      sendBatchPayment({
+        sourceSecret: kp.secret(),
+        payments: [{ destinationPublicKey: Keypair.random().publicKey(), amount: "10" }],
+        assetCode: "USDC",
+        assetIssuer: "not-a-key",
+      }),
+    ).rejects.toBeInstanceOf(ValidationError);
   });
 
   it("submits one payment operation per entry", async () => {

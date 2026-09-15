@@ -11,6 +11,7 @@ vi.mock("@/lib/stellar/network", () => ({
 
 import { getServer } from "@/lib/stellar/network";
 import { invokeSorobanContract } from "@/lib/stellar/soroban";
+import { ValidationError } from "@/lib/stellar/errors";
 
 function mockServer() {
   const kp = Keypair.random();
@@ -45,5 +46,34 @@ describe("invokeSorobanContract", () => {
     expect(ops).toHaveLength(1);
 
     expect(ops[0].body.type).toBe("invokeHostFunction");
+  });
+
+  it("throws ValidationError for an invalid source secret", async () => {
+    await expect(
+      invokeSorobanContract({
+        sourceSecret: "bad",
+        contractId: Address.contract(Buffer.alloc(32)).toString(),
+        functionName: "hello",
+      }),
+    ).rejects.toBeInstanceOf(ValidationError);
+  });
+
+  it("throws ValidationError when contract id or function name is missing", async () => {
+    const { kp } = mockServer();
+    const contractId = Address.contract(Buffer.alloc(32)).toString();
+    await expect(
+      invokeSorobanContract({
+        sourceSecret: kp.secret(),
+        contractId: "",
+        functionName: "hello",
+      }),
+    ).rejects.toBeInstanceOf(ValidationError);
+    await expect(
+      invokeSorobanContract({
+        sourceSecret: kp.secret(),
+        contractId,
+        functionName: "",
+      }),
+    ).rejects.toBeInstanceOf(ValidationError);
   });
 });

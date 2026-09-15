@@ -6,6 +6,8 @@ import {
   nativeToScVal,
 } from "@stellar/stellar-sdk";
 import { getServer, getNetworkConfig, StellarNetwork } from "./network";
+import { isValidSecretKey } from "./validation";
+import { ValidationError, NetworkError, NotFoundError } from "./errors";
 
 export interface SorobanInvokeParams {
   sourceSecret: string;
@@ -18,11 +20,30 @@ export interface SorobanInvokeParams {
 export async function invokeSorobanContract(params: SorobanInvokeParams): Promise<string> {
   const { sourceSecret, contractId, functionName, args = [], network = "testnet" } = params;
 
+  if (!isValidSecretKey(sourceSecret)) {
+    throw new ValidationError("Invalid source secret key.");
+  }
+  if (!contractId) {
+    throw new ValidationError("Contract id is required.");
+  }
+  if (!functionName) {
+    throw new ValidationError("Function name is required.");
+  }
+
   const sourceKeypair = Keypair.fromSecret(sourceSecret);
   const server = getServer(network);
   const { networkPassphrase } = getNetworkConfig(network);
 
-  const sourceAccount = await server.loadAccount(sourceKeypair.publicKey());
+  let sourceAccount;
+  try {
+    sourceAccount = await server.loadAccount(sourceKeypair.publicKey());
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    if (message.includes("not found")) {
+      throw new NotFoundError(sourceKeypair.publicKey());
+    }
+    throw new NetworkError(message);
+  }
 
   const invokeOperation = Operation.invokeContractFunction({
     contract: contractId,
@@ -41,7 +62,13 @@ export async function invokeSorobanContract(params: SorobanInvokeParams): Promis
 
   transaction.sign(sourceKeypair);
 
-  const result = await server.submitTransaction(transaction);
+  let result;
+  try {
+    result = await server.submitTransaction(transaction);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    throw new NetworkError(message, 500);
+  }
 
   return result.hash;
 }

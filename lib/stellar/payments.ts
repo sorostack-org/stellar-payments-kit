@@ -7,6 +7,8 @@ import {
   Memo,
 } from "@stellar/stellar-sdk";
 import { getServer, getNetworkConfig, StellarNetwork } from "./network";
+import { isValidPublicKey, isValidSecretKey, isValidAmount, isValidMemo } from "./validation";
+import { ValidationError, NetworkError, NotFoundError } from "./errors";
 
 export interface PaymentParams {
   /** Secret key of the sending account */
@@ -34,17 +36,53 @@ export interface PaymentResult {
   ledger: number;
 }
 
+function validatePaymentInput(params: PaymentParams): void {
+  if (!isValidSecretKey(params.sourceSecret)) {
+    throw new ValidationError("Invalid source secret key.");
+  }
+  if (!isValidAmount(params.amount)) {
+    throw new ValidationError(`Invalid amount: ${params.amount}.`);
+  }
+  if (!isValidPublicKey(params.destinationPublicKey)) {
+    throw new ValidationError("Invalid destination public key.");
+  }
+  if (params.memo !== undefined && !isValidMemo(params.memo)) {
+    throw new ValidationError("Memo must be at most 28 bytes.");
+  }
+}
+
+function validateAssetPaymentInput(params: AssetPaymentParams): void {
+  validatePaymentInput(params);
+  if (!params.assetCode || !new RegExp(/^[A-Za-z0-9]{1,12}$/).test(params.assetCode)) {
+    throw new ValidationError(`Invalid asset code: ${params.assetCode}.`);
+  }
+  if (!isValidPublicKey(params.assetIssuer)) {
+    throw new ValidationError("Invalid asset issuer public key.");
+  }
+}
+
 /**
  * Sends a native XLM payment from one account to another.
  */
 export async function sendPayment(params: PaymentParams): Promise<PaymentResult> {
   const { sourceSecret, destinationPublicKey, amount, memo, network = "testnet" } = params;
 
+  validatePaymentInput(params);
+
   const sourceKeypair = Keypair.fromSecret(sourceSecret);
   const server = getServer(network);
   const { networkPassphrase } = getNetworkConfig(network);
 
-  const sourceAccount = await server.loadAccount(sourceKeypair.publicKey());
+  let sourceAccount;
+  try {
+    sourceAccount = await server.loadAccount(sourceKeypair.publicKey());
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    if (message.includes("not found")) {
+      throw new NotFoundError(sourceKeypair.publicKey());
+    }
+    throw new NetworkError(message);
+  }
 
   const builder = new TransactionBuilder(sourceAccount, {
     fee: BASE_FEE,
@@ -64,7 +102,13 @@ export async function sendPayment(params: PaymentParams): Promise<PaymentResult>
   const transaction = builder.setTimeout(30).build();
   transaction.sign(sourceKeypair);
 
-  const result = await server.submitTransaction(transaction);
+  let result;
+  try {
+    result = await server.submitTransaction(transaction);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    throw new NetworkError(message, 500);
+  }
 
   return {
     hash: result.hash,
@@ -87,11 +131,23 @@ export async function sendAssetPayment(params: AssetPaymentParams): Promise<Paym
     network = "testnet",
   } = params;
 
+  validateAssetPaymentInput(params);
+
   const sourceKeypair = Keypair.fromSecret(sourceSecret);
   const server = getServer(network);
   const { networkPassphrase } = getNetworkConfig(network);
 
-  const sourceAccount = await server.loadAccount(sourceKeypair.publicKey());
+  let sourceAccount;
+  try {
+    sourceAccount = await server.loadAccount(sourceKeypair.publicKey());
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    if (message.includes("not found")) {
+      throw new NotFoundError(sourceKeypair.publicKey());
+    }
+    throw new NetworkError(message);
+  }
+
   const asset = new Asset(assetCode, assetIssuer);
 
   const builder = new TransactionBuilder(sourceAccount, {
@@ -112,7 +168,13 @@ export async function sendAssetPayment(params: AssetPaymentParams): Promise<Paym
   const transaction = builder.setTimeout(30).build();
   transaction.sign(sourceKeypair);
 
-  const result = await server.submitTransaction(transaction);
+  let result;
+  try {
+    result = await server.submitTransaction(transaction);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    throw new NetworkError(message, 500);
+  }
 
   return {
     hash: result.hash,
@@ -132,11 +194,30 @@ export async function addTrustline(params: {
 }): Promise<PaymentResult> {
   const { accountSecret, assetCode, assetIssuer, network = "testnet" } = params;
 
+  if (!isValidSecretKey(accountSecret)) {
+    throw new ValidationError("Invalid account secret key.");
+  }
+  if (!params.assetCode || !new RegExp(/^[A-Za-z0-9]{1,12}$/).test(params.assetCode)) {
+    throw new ValidationError(`Invalid asset code: ${assetCode}.`);
+  }
+  if (!isValidPublicKey(assetIssuer)) {
+    throw new ValidationError("Invalid asset issuer public key.");
+  }
+
   const keypair = Keypair.fromSecret(accountSecret);
   const server = getServer(network);
   const { networkPassphrase } = getNetworkConfig(network);
 
-  const account = await server.loadAccount(keypair.publicKey());
+  let account;
+  try {
+    account = await server.loadAccount(keypair.publicKey());
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    if (message.includes("not found")) {
+      throw new NotFoundError(keypair.publicKey());
+    }
+    throw new NetworkError(message);
+  }
   const asset = new Asset(assetCode, assetIssuer);
 
   const transaction = new TransactionBuilder(account, {
@@ -149,7 +230,13 @@ export async function addTrustline(params: {
 
   transaction.sign(keypair);
 
-  const result = await server.submitTransaction(transaction);
+  let result;
+  try {
+    result = await server.submitTransaction(transaction);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    throw new NetworkError(message, 500);
+  }
 
   return {
     hash: result.hash,
