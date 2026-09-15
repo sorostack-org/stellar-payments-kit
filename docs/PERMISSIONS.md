@@ -22,4 +22,4 @@
 
 ## Changing Permissions
 
-Use the `setOptions` operation to modify signers and thresholds.
+Use `setAccountOptions` (from `set-options.ts`) or the `multisig.ts` helpers to modify signers and thresholds.

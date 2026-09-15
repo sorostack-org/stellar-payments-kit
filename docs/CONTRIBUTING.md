@@ -4,7 +4,7 @@
 
 - Node.js 18+
 - Rust 1.78+ (for Soroban contracts)
-- wasm32-unknown-unknown target (`rustup target add wasm32-unknown-unknown`)
+- `wasm32v1-none` target (declared in `rust-toolchain.toml`)
 
 ## Setup
 
@@ -28,7 +28,7 @@ npm run lint         # ESLint
 ### Rust
 
 ```bash
-cargo build --release --target wasm32-unknown-unknown
+cargo build --release --target wasm32v1-none
 cargo test --all-features
 cargo clippy --all-targets --all-features -- -D warnings
 ```

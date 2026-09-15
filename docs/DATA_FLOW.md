@@ -2,7 +2,7 @@
 
 ## Payment Flow
 
-1. Client calls `createPayment(params)`
+1. Client calls `sendPayment(params)`
 2. Module loads source account from Horizon
 3. Builds transaction with appropriate operations
 4. Signs transaction with source keypair
@@ -11,7 +11,7 @@
 
 ## Soroban Contract Flow
 
-1. Client calls `invokeContract(params)`
+1. Client calls `invokeSorobanContract(params)`
 2. Module prepares Soroban authorization
 3. Builds and signs transaction
 4. Submits to Soroban RPC endpoint

@@ -6,10 +6,11 @@ Contact the maintainers directly at security@stellar-payments-kit.dev. Do not fi
 
 ## Supported Versions
 
-| Version | Supported |
-| ------- | --------- |
-| 1.x     | Yes       |
-| < 1.0   | No        |
+The project is pre-1.0. Support is ongoing for the current `main` branch.
+
+| Version    | Supported |
+| ---------- | --------- |
+| 0.x (main) | Yes       |
 
 ## Security Best Practices
 

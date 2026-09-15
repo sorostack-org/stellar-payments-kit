@@ -42,15 +42,15 @@ Working directly with `stellar-sdk` means writing a lot of boilerplate — loadi
 - **Soroban contract invocation** — call smart contracts from TypeScript
 - **Transaction polling** — wait for transaction confirmation
 - **Input validation** — validate keys, amounts, and memos
-- **AMM / Liquidity Pools** — create pools and swap tokens
-- **Staking & Lending** — stake, unstake, claim rewards, lend, borrow
-- **NFT management** — mint, transfer, and burn NFTs
+- **AMM / Liquidity Pools** — pool calculations, deposits, and swaps
+- **Staking & Lending** — reward/likelihood calculations and health-factor analysis
+- **NFT metadata** — validate and format NFT identifiers and metadata
 - **Multisig** — configure multi-signature accounts
 - **Time locks & escrow** — conditional payment escrows
-- **Webhooks & notifications** — event-driven callbacks
 - **Rate limiting & caching** — performance optimizations
 - **Middleware pipeline** — composable request/response middleware
 - **Analytics & metrics** — usage tracking and monitoring
+- **Webhooks & notifications** — event-driven callbacks
 
 ### Soroban Contracts (Rust)
 
@@ -70,7 +70,7 @@ Built with Next.js — explore all features via a clean tabbed interface.
 
 - Node.js 18+
 - Rust 1.78+ (for Soroban contracts)
-- `wasm32-unknown-unknown` target: `rustup target add wasm32-unknown-unknown`
+- `wasm32v1-none` target (declared in `rust-toolchain.toml`)
 
 ### Installation
 
@@ -91,7 +91,7 @@ Open [http://localhost:3000](http://localhost:3000) to explore the interactive d
 ### Build Soroban contracts
 
 ```bash
-cargo build --release --target wasm32-unknown-unknown
+cargo build --release --target wasm32v1-none
 ```
 
 ---

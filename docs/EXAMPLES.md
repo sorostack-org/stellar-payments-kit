@@ -1,14 +1,20 @@
 # Examples
 
-See the `examples/` directory for runnable TypeScript examples:
+The `scripts/` directory contains runnable example scripts:
 
-| Example               | Description                         |
-| --------------------- | ----------------------------------- |
-| basic-payment.ts      | Send XLM payment                    |
-| account-management.ts | Create and manage accounts          |
-| soroban-contract.ts   | Deploy and invoke Soroban contracts |
-| multisig-setup.ts     | Configure multisig signing          |
-| liquidity-pool.ts     | Create AMM liquidity pools          |
-| staking-rewards.ts    | Stake, claim rewards, unstake       |
+| Script                      | Description                                       |
+| --------------------------- | ------------------------------------------------- |
+| `example-fund-account.mjs`  | Generate a keypair and fund Testnet via Friendbot |
+| `example-batch-payment.mjs` | Send multiple payments in one transaction         |
+| `example-path-payment.mjs`  | Send a path payment                               |
+| `check-balance.mjs`         | Check account balance                             |
+| `generate-keypair.mjs`      | Print a new Stellar keypair                       |
+| `benchmark.ts`              | Run multiple payment benchmarks                   |
 
-Run with: `npx ts-node examples/<filename>`
+Run with:
+
+```bash
+node scripts/example-fund-account.mjs
+```
+
+See the interactive demo app (`npm run dev`) for a full feature walkthrough.

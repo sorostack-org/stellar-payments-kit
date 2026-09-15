@@ -1,17 +1,19 @@
 # Changelog
 
-## [1.0.0] - 2026-07-29
+All notable changes to this project are documented in this file.
+
+## [Unreleased]
 
 ### Added
 
-- Soroban smart contracts: escrow, token-swap, payment-splitter, vault, multi-sig, time-locked-auth
-- TypeScript library with 30+ Stellar modules
-- React hooks for Stellar integration
-- GitHub Actions CI/CD (10+ workflows)
-- Documentation (architecture, API, errors, testing, FAQ, deployment)
-- Complete test suite with 90+ tests
+- TypeScript library with 60+ Stellar modules (accounts, payments, assets, multisig, Soroban invocation, SEP-10, and more)
+- Batch payment support (multiple payments in a single transaction with a tx-level memo)
+- Soroban smart contracts: escrow, token-swap, payment-splitter
+- Interactive Next.js demo app
+- GitHub Actions CI/CD (typecheck, lint, tests, coverage, Rust, security audits, benchmarks, CodeQL)
+- Documentation (architecture, API reference, errors, testing, FAQ, deployment)
+- Test suite (190+ tests)
 - Docker and devcontainer support
-- Comprehensive code quality config
 
 ### Security
 

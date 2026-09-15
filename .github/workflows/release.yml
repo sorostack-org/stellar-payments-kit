@@ -30,4 +30,4 @@ jobs:
         with:
           body_path: release-notes.md
           files: |
-            contracts/*/target/wasm32-unknown-unknown/release/*.wasm
+            contracts/*/target/wasm32v1-none/release/*.wasm

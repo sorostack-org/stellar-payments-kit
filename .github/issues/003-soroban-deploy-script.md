@@ -9,7 +9,7 @@ Create a Node.js script that automates deploying Soroban contracts to the Stella
 
 ## Acceptance Criteria
 
-- [ ] Script reads compiled `.wasm` files from `target/wasm32-unknown-unknown/release/`
+- [ ] Script reads compiled `.wasm` files from `target/wasm32v1-none/release/`
 - [ ] Deploys contracts to testnet via Soroban RPC
 - [ ] Saves deployed contract IDs to a JSON file
 - [ ] Supports configurable network (testnet/mainnet)

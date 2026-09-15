@@ -9,11 +9,11 @@
 
 - README: Getting started guide
 - ARCHITECTURE.md: System design overview
-- API.md: Full API reference
+- API_REFERENCE.md: Full API reference
 - TESTING.md: Testing guide
 - FAQ.md: Frequently asked questions
 
 ## Resources
 
 - Stellar Documentation: https://developers.stellar.org
-- Soroban Docs: https://soroban.stellar.org
+- Soroban Docs: https://developers.stellar.org/docs/soroban

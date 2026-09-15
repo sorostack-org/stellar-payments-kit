@@ -7,16 +7,16 @@ The library provides custom error classes in `errors.ts`:
 - `StellarError` — Base error class
 - `NetworkError` — Network connectivity issues
 - `ValidationError` — Input validation failures
-- `TransactionError` — Transaction submission failures
-- `AccountError` — Account-related errors
+- `NotFoundError` — Account, asset, or data not found
+- `RateLimitError` — Horizon rate limiting exceeded
 
 ## Best Practices
 
 ```typescript
-import { StellarError, NetworkError } from "./errors";
+import { StellarError, NetworkError, ValidationError } from "@/lib/stellar/errors";
 
 try {
-  const result = await createPayment(params);
+  const result = await sendPayment(params);
 } catch (error) {
   if (error instanceof NetworkError) {
     // Retry logic

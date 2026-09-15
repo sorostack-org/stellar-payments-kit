@@ -1,10 +1,12 @@
 # Examples
 
-- `basic-payment.ts` — Simple XLM payment
-- `account-management.ts` — Create and query accounts
-- `soroban-contract.ts` — Deploy and invoke Soroban contracts
-- `multisig-setup.ts` — Configure multisig signing
-- `liquidity-pool.ts` — Create and manage liquidity pools
-- `staking-rewards.ts` — Stake, claim rewards, and unstake
+Runnable example scripts live in the `scripts/` directory:
 
-Run with `npx ts-node examples/<filename>`.
+- `example-fund-account.mjs` — Generate a keypair and fund Testnet via Friendbot
+- `example-batch-payment.mjs` — Send multiple payments in one transaction
+- `example-path-payment.mjs` — Send a path payment
+- `check-balance.mjs` — Check account balance
+- `generate-keypair.mjs` — Print a new Stellar keypair
+- `benchmark.ts` — Run multiple payment benchmarks
+
+Run with `node scripts/<filename>`.

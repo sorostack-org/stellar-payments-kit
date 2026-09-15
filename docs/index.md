@@ -3,7 +3,7 @@
 ## Getting Started
 
 - [Getting Started](GETTING_STARTED.md)
-- [Installation](https://www.npmjs.com/package/stellar-payments-kit)
+- [Installation](GETTING_STARTED.md)
 
 ## Guides
 

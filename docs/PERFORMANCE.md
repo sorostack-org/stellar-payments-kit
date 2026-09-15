@@ -9,4 +9,4 @@
 
 ## Benchmarks
 
-Run `npm run benchmark` to test key operations.
+Run `npx vitest bench --run` to test key operations.
