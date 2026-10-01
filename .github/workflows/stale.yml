@@ -9,7 +9,7 @@ jobs:
     name: Close Stale Issues
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/stale@v9
+      - uses: actions/stale@v11
         with:
           stale-issue-message: "This issue has been inactive for 30 days. Please update or it will be closed."
           close-issue-message: "Closing due to inactivity. Feel free to reopen if needed."
