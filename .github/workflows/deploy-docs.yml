@@ -22,7 +22,7 @@ jobs:
       - run: npm ci
       - run: npx --yes typedoc --out docs/api 2>&1 || echo "typedoc generation skipped"
       - id: configure
-        uses: actions/configure-pages@v4
+        uses: actions/configure-pages@v6
         continue-on-error: true
       - if: steps.configure.outcome == 'success'
         uses: actions/upload-pages-artifact@v3
